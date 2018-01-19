@@ -21,37 +21,45 @@ tableView.register(UserInfoCell.classForCoder(), forCellReuseIdentifier: "UserIn
 tableView.register(SimpleCell.classForCoder(), forCellReuseIdentifier: "Simple")
 ```
 
-- 添加section和row
+- 覆盖方法tableViewDataSource，并添加section和row
 ```swift
-addSection {
-    let favorites = SimpleRow(reuseIdentifier: "Simple")
-    favorites.text = "收藏"
-    $0.addRow(favorites)
+override func tableViewDataSource() {
+    //添加section
     
-    let myPosts = SimpleRow(reuseIdentifier: "Simple")
-    myPosts.text = "相册"
-    $0.addRow(myPosts)
+    addSection {
+        let wallet = SimpleRow(reuseIdentifier: "Simple")
+        wallet.text = "钱包"
+        $0.addRow(wallet)
+    }
     
-    let cardsAndOffers = SimpleRow(reuseIdentifier: "Simple")
-    cardsAndOffers.text = "卡包"
-    $0.addRow(cardsAndOffers)
+    addSection {
+        let favorites = SimpleRow(reuseIdentifier: "Simple")
+        favorites.text = "收藏"
+        $0.addRow(favorites)
+        
+        let myPosts = SimpleRow(reuseIdentifier: "Simple")
+        myPosts.text = "相册"
+        $0.addRow(myPosts)
+        
+        let cardsAndOffers = SimpleRow(reuseIdentifier: "Simple")
+        cardsAndOffers.text = "卡包"
+        $0.addRow(cardsAndOffers)
+        
+        let stickerGallery = SimpleRow(reuseIdentifier: "Simple")
+        stickerGallery.text = "表情"
+        $0.addRow(stickerGallery)
+    }
     
-    let stickerGallery = SimpleRow(reuseIdentifier: "Simple")
-    stickerGallery.text = "表情"
-    $0.addRow(stickerGallery)
-}
-
-addSection {
-    let settings = SimpleRow(reuseIdentifier: "Simple")
-    settings.text = "设置"
-    $0.addRow(settings)
 }
 ```
 
 - section被add多少次意味着section数目有多少,可以通过添加if语句控制某个section要不要显示，row也是类似
 
-- 最后刷新表格
-
+- 刷新表格,调用reloadTableView()而不是tableView.reloadData
+```swift
+//相当于：清空section模型数组+tableViewDataSource+tableView.reloadData
+reloadTableView()
+```
 ### TableViewRow是什么？
 - 以上代码中SimpleRow就是TableViewRow的子类，根据具体cell要显示的内容，可以添加若干属性，尽管可以直接使用TableViewRow，给TableViewRow的useInfo属性绑定一组数据，但子类化会使您的代码的可读性更好。
 

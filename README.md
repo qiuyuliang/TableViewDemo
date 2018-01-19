@@ -50,6 +50,24 @@ addSection {
 
 - section被add多少次意味着section数目有多少,可以通过添加if语句控制某个section要不要显示，row也是类似
 
+- 最后刷新表格
+
+### TableViewRow是什么？
+- 以上代码中SimpleRow就是TableViewRow的子类，根据具体cell要显示的内容，可以添加若干属性，尽管可以直接使用TableViewRow，给TableViewRow的useInfo属性绑定一组数据，但子类化会使您的代码的可读性更好。
+
+### TableViewCell
+- 同理需要你自定义的cell继承于TableViewCell，并覆盖cellWillAppear，添加刷新控件的一些代码，比如下面的代码数据源取自SimpleRow
+
+```swift
+override func cellWillAppear() {
+    let simpleRow = tableViewRow! as! SimpleRow
+
+    textLabel?.text =  simpleRow.text
+}
+```
+
+
+
 
 
 

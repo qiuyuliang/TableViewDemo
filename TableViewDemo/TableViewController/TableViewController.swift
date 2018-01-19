@@ -34,7 +34,24 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
         view.addSubview(tableView)
+    }
+    
+    
+    // MARK: - Public
+    
+    /// tableView数据源初始化
+    public func tableViewDataSource() {
+        
+    }
+    
+    /// 清空sections数组,刷新tableView
+    public func reloadTableView() {
+        self.sections.removeAll()
+        tableViewDataSource()
+        tableView.reloadData()
     }
 
     /// 方便子类添加section,免去section的初始化

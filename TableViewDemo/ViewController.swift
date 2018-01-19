@@ -18,6 +18,12 @@ class ViewController: TableViewController {
         tableView.register(UserInfoCell.classForCoder(), forCellReuseIdentifier: "UserInfo")
         tableView.register(SimpleCell.classForCoder(), forCellReuseIdentifier: "Simple")
 
+        
+        
+        reloadTableView()
+    }
+    
+    override func tableViewDataSource() {
         //添加section
         addSection { (section) in
             let userInfoRow = UserInfoRow(reuseIdentifier: "UserInfo", rowHeight: 100)
@@ -63,8 +69,6 @@ class ViewController: TableViewController {
             settings.text = "设置"
             $0.addRow(settings)
         }
-        
-        tableView.reloadData()
     }
 
 }
